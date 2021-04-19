@@ -1,16 +1,13 @@
-add_library(glad_interface INTERFACE)
-
-target_include_directories(glad_interface
-  INTERFACE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+add_library(glad_obj_lib OBJECT
+  ${CMAKE_CURRENT_LIST_DIR}/src/glad.c
 )
 
-target_sources(glad_interface
-  INTERFACE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/glad.c>
+set_target_properties(glad_obj_lib
+  PROPERTIES
+  POSITION_INDEPENDENT_CODE ON
 )
 
-target_link_libraries(glad_interface
-  INTERFACE
-  $<BUILD_INTERFACE:${CMAKE_DL_LIBS}>
+target_include_directories(glad_obj_lib
+  PUBLIC
+  ${CMAKE_CURRENT_LIST_DIR}/include
 )
